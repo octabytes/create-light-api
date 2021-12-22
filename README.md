@@ -1,5 +1,5 @@
-# create-rest-api
+# create-light-api
 
 Npx command to create REST API
 
-`npx create-rest-api`
+`npx create-light-api`

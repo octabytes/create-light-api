@@ -1,11 +1,12 @@
 {
-  "name": "create-rest-api",
+  "name": "create-light-api",
   "version": "1.0.0",
   "description": "npx command to create rest api",
   "main": "src/main.js",
   "bin": {
-    "@octabytes/create-rest-api": "bin/create-rest-api",
-    "create-rest-api": "bin/create-rest-api"
+    "@octabytes/create-light-api": "bin/create-light-api",
+    "create-light-api": "bin/create-light-api",
+    "light-api": "bin/create-light-api"
   },
   "publishConfig": {
     "access": "public"
@@ -15,11 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/octabytes/create-rest-api.git"
+    "url": "git+https://github.com/octabytes/create-light-api.git"
   },
   "keywords": [
     "cli",
-    "create-rest-api",
+    "create-light-api",
     "rest-api",
     "api",
     "rest",
@@ -29,9 +30,9 @@
   "author": "OctaByte",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/octabytes/create-rest-api/issues"
+    "url": "https://github.com/octabytes/create-light-api/issues"
   },
-  "homepage": "https://github.com/octabytes/create-rest-api#readme",
+  "homepage": "https://github.com/octabytes/create-light-api#readme",
   "dependencies": {
     "arg": "^5.0.1",
     "colors": "^1.4.0",
