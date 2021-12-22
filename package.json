@@ -1,0 +1,50 @@
+{
+  "name": "create-rest-api",
+  "version": "1.0.0",
+  "description": "npx command to create rest api",
+  "main": "src/main.js",
+  "bin": {
+    "@octabytes/create-rest-api": "bin/create-rest-api",
+    "create-rest-api": "bin/create-rest-api"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/octabytes/create-rest-api.git"
+  },
+  "keywords": [
+    "cli",
+    "create-rest-api",
+    "rest-api",
+    "api",
+    "rest",
+    "light",
+    "typescript-api"
+  ],
+  "author": "OctaByte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/octabytes/create-rest-api/issues"
+  },
+  "homepage": "https://github.com/octabytes/create-rest-api#readme",
+  "dependencies": {
+    "arg": "^5.0.1",
+    "colors": "^1.4.0",
+    "copy-template-dir": "^1.4.0",
+    "esm": "^3.2.25",
+    "execa": "^5.1.1",
+    "inquirer": "^8.2.0",
+    "listr": "^0.14.3",
+    "ncp": "^2.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/"
+  ]
+}
