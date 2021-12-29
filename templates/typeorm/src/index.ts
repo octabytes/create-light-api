@@ -2,7 +2,6 @@ import "reflect-metadata";
 import dotenv from "dotenv";
 import express from "express";
 
-import Database from "./database";
 import AppBuilder from "./AppBuilder";
 import errorMiddleware from "./middleware/error.middleware";
 import urlNotFoundMiddleWare from "./middleware/urlNotFound.middleware";
@@ -15,13 +14,11 @@ const appBuilder = new AppBuilder(app);
 const port = process.env.PORT || "8080";
 const portNumber = parseInt(port);
 
-Database.initialize().then(() => {
-  appBuilder
-    .addMiddleware(express.json())
-    .addMiddleware(corsMiddleware())
-    .initializeControllers()
-    .enableOpenapiDocs()
-    .addMiddleware(urlNotFoundMiddleWare)
-    .addMiddleware(errorMiddleware)
-    .build(portNumber, () => console.log("Listing on Port", portNumber));
-});
+appBuilder
+  .addMiddleware(express.json())
+  .addMiddleware(corsMiddleware())
+  .initializeControllers()
+  .enableOpenapiDocs()
+  .addMiddleware(urlNotFoundMiddleWare)
+  .addMiddleware(errorMiddleware)
+  .build(portNumber, () => console.log("Listing on Port", portNumber));

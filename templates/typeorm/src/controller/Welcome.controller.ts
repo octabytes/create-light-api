@@ -2,6 +2,7 @@ import { plainToClass } from "class-transformer";
 import { Request, Response } from "express";
 import { Service as AutoInjection } from "typedi";
 import MessageDTO from "../dto/request/Message.dto";
+import ParamMessageDTO from "../dto/request/ParamMessage.dto";
 import validateRequest from "../middleware/requestValidator.middleware";
 import { WelcomeService } from "../service/Welcome.service";
 import BaseController from "./Base.controller";
@@ -20,12 +21,23 @@ class WelcomeController extends BaseController {
       this.saySomething,
       validateRequest(MessageDTO)
     );
-    this.addAsyncEndpoint("GET", "/hello-from-repo", this.helloFromRepo);
-    this.addAsyncEndpoint("GET", "/hello-to-repo", this.helloToRepo);
+    this.addEndpoint("GET", "/hello-from-repo", this.helloFromRepo);
     this.addEndpoint("GET", "/reply", this.reply, validateRequest(MessageDTO));
     this.addEndpoint("GET", "/error-test", this.errorTest);
     this.addAsyncEndpoint("GET", "/error-test-async", this.errorTestAsync);
+    this.addEndpoint(
+      "GET",
+      "/validation-test/:name",
+      this.validationTest,
+      validateRequest(ParamMessageDTO)
+    );
   }
+
+  private validationTest = () => {
+    return {
+      message: "ok",
+    };
+  };
 
   private errorTest = () => {
     this.welcomeService.errorTest();
@@ -47,14 +59,8 @@ class WelcomeController extends BaseController {
     return message;
   };
 
-  private helloFromRepo = async () => {
-    const message = await this.welcomeService.helloFromRepo();
-
-    return message;
-  };
-
-  private helloToRepo = async () => {
-    const message = await this.welcomeService.helloToRepo();
+  private helloFromRepo = () => {
+    const message = this.welcomeService.helloFromRepo();
 
     return message;
   };

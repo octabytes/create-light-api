@@ -1,14 +1,12 @@
 import { Service as AutoInjection } from "typedi";
 import MessageDTO from "../dto/request/Message.dto";
 import WelcomeDTO from "../dto/response/Welcome.dto";
-import NotFound from "../error/NotFound.error";
 import WelcomeRepo from "../repository/Welcome.repo";
 
 export interface IWelcomeService {
   hello(): WelcomeDTO;
   saySomething(message: MessageDTO): WelcomeDTO;
-  helloFromRepo(): Promise<WelcomeDTO>;
-  helloToRepo(): Promise<WelcomeDTO>;
+  helloFromRepo(): WelcomeDTO;
   reply(message: MessageDTO): WelcomeDTO;
   errorTest(): string;
   asyncErrorTest(): Promise<void>;
@@ -22,8 +20,8 @@ export class WelcomeService implements IWelcomeService {
     throw new Error("Error Test");
   }
 
-  async asyncErrorTest(): Promise<void> {
-    throw new Error("Async error test");
+  asyncErrorTest(): Promise<void> {
+    throw new Error("Async Error test");
   }
 
   reply(message: MessageDTO): WelcomeDTO {
@@ -33,23 +31,10 @@ export class WelcomeService implements IWelcomeService {
     return welcome;
   }
 
-  async helloFromRepo(): Promise<WelcomeDTO> {
-    const welcomeEntity = await this.welcomeRepo.getEntity("text");
-
-    if (!welcomeEntity) {
-      throw new NotFound("welcome entity not found");
-    }
-
+  helloFromRepo(): WelcomeDTO {
+    const repoText = this.welcomeRepo.getText();
     const welcome: WelcomeDTO = new WelcomeDTO();
-    welcome.message = welcomeEntity.text;
-
-    return welcome;
-  }
-
-  async helloToRepo(): Promise<WelcomeDTO> {
-    const welcomeEntity = await this.welcomeRepo.saveEntity("text");
-    const welcome: WelcomeDTO = new WelcomeDTO();
-    welcome.message = welcomeEntity.text;
+    welcome.message = repoText.text;
 
     return welcome;
   }

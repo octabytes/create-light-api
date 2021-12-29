@@ -1,4 +1,5 @@
 import { Express, NextFunction, Request, Response } from "express";
+import validateRequest from "../middleware/requestValidator.middleware";
 import HttpExpress from "../utils/HttpExpress";
 
 abstract class BaseController {
@@ -30,6 +31,53 @@ abstract class BaseController {
       }
     };
   };
+
+  /**
+   * Helper function to reduce the boilerplate, at core it run addEndpoint method
+   * Contain only one middleware which is validateRequest
+   * @param httpMethod GET, POST, DELETE, PUT
+   * @param route Endpoint URL
+   * @param fn Method that return the response
+   * @param requestBody Request body if need to validate
+   */
+  protected endpoint(
+    httpMethod: string,
+    route: string,
+    fn: (req: Request, res: Response, next?: NextFunction) => any,
+    requestBody?: any
+  ) {
+    if (requestBody) {
+      this.addEndpoint(httpMethod, route, fn, validateRequest(requestBody));
+    } else {
+      this.addEndpoint(httpMethod, route, fn);
+    }
+  }
+
+  /**
+   * Helper function to reduce the boilerplate, at core it run addAsyncEndpoint method
+   * Contain only one middleware which is validateRequest
+   * @param httpMethod GET, POST, DELETE, PUT
+   * @param route Endpoint URL
+   * @param fn Method that return the response
+   * @param requestBody Request body if need to validate
+   */
+  protected asyncEndpoint(
+    httpMethod: string,
+    route: string,
+    fn: (req: Request, res: Response, next?: NextFunction) => Promise<any>,
+    requestBody?: any
+  ) {
+    if (requestBody) {
+      this.addAsyncEndpoint(
+        httpMethod,
+        route,
+        fn,
+        validateRequest(requestBody)
+      );
+    } else {
+      this.addAsyncEndpoint(httpMethod, route, fn);
+    }
+  }
 
   public addEndpoint(
     httpMethod: string,
