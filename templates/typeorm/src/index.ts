@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import dotenv from "dotenv";
 import express from "express";
+import morgan from "morgan";
 
 import Database from "./database";
 import AppBuilder from "./AppBuilder";
@@ -17,6 +18,7 @@ const portNumber = parseInt(port);
 
 Database.initialize().then(() => {
   appBuilder
+    .addMiddleware(morgan("dev"))
     .addMiddleware(express.json())
     .addMiddleware(corsMiddleware())
     .initializeControllers()

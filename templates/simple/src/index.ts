@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import dotenv from "dotenv";
 import express from "express";
+import morgan from "morgan";
 
 import AppBuilder from "./AppBuilder";
 import errorMiddleware from "./middleware/error.middleware";
@@ -15,6 +16,7 @@ const port = process.env.PORT || "8080";
 const portNumber = parseInt(port);
 
 appBuilder
+  .addMiddleware(morgan("dev"))
   .addMiddleware(express.json())
   .addMiddleware(corsMiddleware())
   .initializeControllers()

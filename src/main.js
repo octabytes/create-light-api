@@ -35,6 +35,7 @@ async function installPackages(options) {
     "swagger-jsdoc",
     "swagger-ui-express",
     "typedi",
+    "morgan",
   ];
 
   if (options.template.toLowerCase() == "typeorm") {
@@ -58,6 +59,7 @@ async function installDevPackages(options) {
     "@types/node",
     "@types/swagger-jsdoc",
     "@types/swagger-ui-express",
+    "@types/morgan",
     "ts-node",
     "ts-node-dev",
     "typescript",
