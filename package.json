@@ -1,6 +1,6 @@
 {
   "name": "create-light-api",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "npx command to create rest api",
   "main": "src/main.js",
   "bin": {
