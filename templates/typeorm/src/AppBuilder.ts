@@ -51,7 +51,9 @@ class AppBuilder {
           if (controller instanceof BaseController) {
             controller.initialize(this.app);
           }
-        } catch (err) {}
+        } catch (err) {
+          console.log(err);
+        }
       });
     } catch (err) {
       console.error(err);
